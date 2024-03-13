@@ -6,11 +6,11 @@ class RemoteNewService {
 
   static Future<List<NewsArticle>?> fetchNewsArticle() async {
     var response = await client.get(Uri.parse(
-        "https://newsapi.org/v2/everything?q=tesla&from=2024-02-12&sortBy=publishedAt&apiKey=4181eda4682749a88133fef982b410f5"));
-        if (response.statusCode == 200) {
-          return newsArticleFromJson(response.body);
-        } else {
-          return null;
-        }
+        "https://newsapi.org/v2/everything?q=tesla&from=2024-02-13&sortBy=publishedAt&apiKey=4181eda4682749a88133fef982b410f5"));
+    if (response.statusCode == 200) {
+      return newsArticleFromJson(response.body);
+    } else {
+      return null;
+    }
   }
 }

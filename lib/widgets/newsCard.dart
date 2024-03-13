@@ -1,41 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Newscard extends StatelessWidget {
   final String title;
   final String description;
   final String publishedAt;
   final String author;
-
   final String imageUrl;
 
-  Newscard(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.publishedAt,
-      required this.author,
-      required this.imageUrl});
+  Newscard({
+    Key? key,
+    required this.title,
+    required this.description,
+    required this.publishedAt,
+    required this.author,
+    required this.imageUrl,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        left: 20,
-        right: 20,
-        top: 10,
-        // bottom: 10,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       width: double.infinity,
       height: 300,
       decoration: BoxDecoration(
-        color: Color.fromARGB(124, 255, 255, 255),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 240, 238, 235).withOpacity(0.8),
+            Color.fromARGB(167, 111, 108, 107).withOpacity(0.8),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            spreadRadius: 1,
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3), // changes position of shadow
+            offset: Offset(0, 3),
           ),
         ],
       ),
@@ -43,78 +46,85 @@ class Newscard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.all(10),
-            width: double.infinity,
             height: 150,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               image: DecorationImage(
                 image: NetworkImage(imageUrl),
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.all(10),
-            width: double.infinity,
-            child: Column(
-              children: [
-                Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                Text(
-                  description,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black54,
+                  Text(
+                    description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white70,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.person_rounded,
-                      size: 20,
-                      color: Colors.black,
-                    ),
-                    Spacer(),
-                    Text(
-                      author,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black87,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.person,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            author,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Icon(
-                      Icons.calendar_month_outlined,
-                      size: 20,
-                      color: Colors.black26,
-                    ),
-                    Text(
-                      publishedAt,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.calendar_today,
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            DateFormat('dd MMM')
+                                .format(DateTime.parse(publishedAt)),
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.end,
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

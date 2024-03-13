@@ -10,7 +10,7 @@ class NewsArticle {
   Source source;
   String? author;
   String title;
-  String description;
+  String? description;
   String url;
   String? urlToImage;
   String content;

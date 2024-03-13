@@ -18,9 +18,11 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           centerTitle: true,
           toolbarHeight: 100,
-          shadowColor: Colors.yellow,
+          shadowColor: Color.fromARGB(255, 255, 0, 0),
+          //backgroundColor: Color(0xFF289),
+          //foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(30),
           ),
         ),
         fontFamily: 'Georgia',
